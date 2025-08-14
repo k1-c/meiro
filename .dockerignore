@@ -1,0 +1,8 @@
+.stack-work
+.git
+.github
+*.md
+dist
+release
+test
+.gitignore

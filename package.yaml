@@ -1,0 +1,65 @@
+name:                meiro
+version:             0.1.0.0
+github:              "k1-c/meiro"
+license:             MIT
+author:              "k1-c"
+maintainer:          "k1-c@example.com"
+copyright:           "2025 k1-c"
+
+extra-source-files:
+- README.md
+- CHANGELOG.md
+
+synopsis:            A maze generation and solving tool
+category:            Game
+
+description:         Meiro is a command-line tool for generating and solving mazes using various algorithms
+
+dependencies:
+- base >= 4.7 && < 5
+- random
+- time
+- containers
+- array
+- ansi-terminal
+- stm
+
+ghc-options:
+- -Wall
+- -Wcompat
+- -Widentities
+- -Wincomplete-record-updates
+- -Wincomplete-uni-patterns
+- -Wmissing-export-lists
+- -Wmissing-home-modules
+- -Wpartial-fields
+- -Wredundant-constraints
+
+library:
+  source-dirs: src
+
+executables:
+  meiro:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    - -O2
+    dependencies:
+    - meiro
+
+tests:
+  meiro-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - meiro
+    - hspec
+    - hspec-discover
+    - QuickCheck

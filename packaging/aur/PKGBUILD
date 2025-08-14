@@ -1,0 +1,17 @@
+# Maintainer: k1-c <k1-c@example.com>
+pkgname=meiro
+pkgver=1.0.0
+pkgrel=1
+pkgdesc="Terminal-based maze generation and solving game"
+arch=('x86_64')
+url="https://github.com/k1-c/meiro"
+license=('MIT')
+depends=('glibc' 'gmp')
+source=("$pkgname-$pkgver.tar.gz::https://github.com/k1-c/$pkgname/releases/download/v$pkgver/$pkgname-linux-x86_64.tar.gz")
+sha256sums=('SKIP')  # Will be updated with actual checksum
+
+package() {
+    install -Dm755 "$srcdir/meiro" "$pkgdir/usr/bin/meiro"
+}
+
+# vim:set ts=2 sw=2 et:

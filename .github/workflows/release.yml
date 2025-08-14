@@ -1,0 +1,84 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            platform: linux
+            arch: x86_64
+          - os: macos-13  # Intel Mac
+            platform: darwin
+            arch: x86_64
+          - os: macos-14  # Apple Silicon Mac
+            platform: darwin
+            arch: arm64
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Haskell Stack
+      uses: haskell-actions/setup@v2
+      with:
+        ghc-version: "9.10.2"
+        enable-stack: true
+        stack-version: "latest"
+        
+    - name: Cache Stack dependencies
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.stack
+          .stack-work
+        key: ${{ matrix.os }}-stack-${{ hashFiles('stack.yaml.lock') }}
+        restore-keys: |
+          ${{ matrix.os }}-stack-
+          
+    - name: Install system dependencies (Linux)
+      if: matrix.platform == 'linux'
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential libgmp-dev zlib1g-dev
+        
+    - name: Build binary
+      run: |
+        stack build --copy-bins --local-bin-path ./dist
+        
+    - name: Create archive
+      run: |
+        mkdir -p release
+        tar -czf release/meiro-${{ matrix.platform }}-${{ matrix.arch }}.tar.gz -C dist meiro
+        
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: meiro-${{ matrix.platform }}-${{ matrix.arch }}
+        path: release/
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Download all artifacts
+      uses: actions/download-artifact@v3
+      with:
+        path: artifacts
+        
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: artifacts/*/meiro-*.tar.gz
+        draft: false
+        prerelease: false
+        generate_release_notes: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

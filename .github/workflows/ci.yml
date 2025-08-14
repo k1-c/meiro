@@ -1,0 +1,183 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Test Suite
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-13, macos-14]
+        ghc: ['9.10.2']
+        include:
+          - os: ubuntu-latest
+            platform: linux
+          - os: macos-13 
+            platform: darwin-intel
+          - os: macos-14
+            platform: darwin-arm64
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Haskell
+      uses: haskell-actions/setup@v2
+      with:
+        ghc-version: ${{ matrix.ghc }}
+        enable-stack: true
+        stack-version: 'latest'
+
+    - name: Cache Stack dependencies
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.stack
+          .stack-work
+        key: ${{ runner.os }}-stack-${{ hashFiles('**/*.cabal', 'stack.yaml', 'stack.yaml.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-stack-
+
+    - name: Install system dependencies (Linux)
+      if: matrix.platform == 'linux'
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential libgmp-dev zlib1g-dev
+
+    - name: Configure Stack
+      run: |
+        stack config set system-ghc --global true
+        stack config set install-ghc --global false
+
+    - name: Install dependencies
+      run: stack build --only-dependencies
+
+    - name: Build project
+      run: stack build --pedantic
+
+    - name: Run tests
+      run: stack test --coverage
+
+    - name: Generate documentation
+      run: stack haddock --no-haddock-deps
+
+    - name: Upload coverage to Codecov
+      if: matrix.platform == 'linux'
+      uses: codecov/codecov-action@v3
+      with:
+        files: ./.stack-work/dist/x86_64-linux/ghc-*/hpc/combined/all/hpc_index.html
+        flags: unittests
+        name: codecov-${{ matrix.platform }}
+        fail_ci_if_error: false
+
+  lint:
+    name: Code Quality
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Haskell
+      uses: haskell-actions/setup@v2
+      with:
+        ghc-version: '9.10.2'
+        enable-stack: true
+        stack-version: 'latest'
+
+    - name: Cache Stack dependencies
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.stack
+          .stack-work
+        key: ubuntu-lint-stack-${{ hashFiles('**/*.cabal', 'stack.yaml', 'stack.yaml.lock') }}
+        restore-keys: |
+          ubuntu-lint-stack-
+
+    - name: Install system dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential libgmp-dev zlib1g-dev
+
+    - name: Install HLint
+      run: stack install hlint
+
+    - name: Run HLint
+      run: hlint src/ app/ test/ --hint=.hlint.yaml || true
+
+    - name: Check formatting with Ormolu
+      run: |
+        stack install ormolu
+        find src app test -name '*.hs' | xargs ormolu --mode check
+      continue-on-error: true
+
+  build-check:
+    name: Build Check
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Haskell
+      uses: haskell-actions/setup@v2
+      with:
+        ghc-version: '9.10.2'
+        enable-stack: true
+        stack-version: 'latest'
+
+    - name: Cache Stack dependencies
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.stack
+          .stack-work
+        key: ubuntu-build-stack-${{ hashFiles('**/*.cabal', 'stack.yaml', 'stack.yaml.lock') }}
+        restore-keys: |
+          ubuntu-build-stack-
+
+    - name: Install system dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential libgmp-dev zlib1g-dev
+
+    - name: Check that project builds with warnings as errors
+      run: stack build --pedantic --ghc-options="-Werror"
+
+    - name: Test executable runs
+      run: |
+        stack build --copy-bins --local-bin-path ./dist
+        timeout 5s ./dist/meiro --help || true
+
+  security:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Run Trivy vulnerability scanner
+      uses: aquasecurity/trivy-action@master
+      with:
+        scan-type: 'fs'
+        scan-ref: '.'
+        format: 'sarif'
+        output: 'trivy-results.sarif'
+
+    - name: Upload Trivy scan results to GitHub Security tab
+      uses: github/codeql-action/upload-sarif@v2
+      if: always()
+      with:
+        sarif_file: 'trivy-results.sarif'

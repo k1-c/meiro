@@ -1,0 +1,97 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.37.0.
+--
+-- see: https://github.com/sol/hpack
+
+name:           meiro
+version:        0.1.0.0
+synopsis:       A maze generation and solving tool
+description:    Meiro is a command-line tool for generating and solving mazes using various algorithms
+category:       Game
+homepage:       https://github.com/k1-c/meiro#readme
+bug-reports:    https://github.com/k1-c/meiro/issues
+author:         k1-c
+maintainer:     k1-c@example.com
+copyright:      2025 k1-c
+license:        MIT
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    CHANGELOG.md
+
+source-repository head
+  type: git
+  location: https://github.com/k1-c/meiro
+
+library
+  exposed-modules:
+      Lib
+      Meiro.Algorithms.Kruskal
+      Meiro.Algorithms.Prim
+      Meiro.Algorithms.RecursiveBacktrack
+      Meiro.Gameplay
+      Meiro.MazeGeneration
+      Meiro.Rendering
+      Meiro.Types
+      Meiro.Utils
+  other-modules:
+      Paths_meiro
+  hs-source-dirs:
+      src
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+  build-depends:
+      ansi-terminal
+    , array
+    , base >=4.7 && <5
+    , containers
+    , random
+    , stm
+    , time
+  default-language: Haskell2010
+
+executable meiro
+  main-is: Main.hs
+  other-modules:
+      Paths_meiro
+  hs-source-dirs:
+      app
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N -O2
+  build-depends:
+      ansi-terminal
+    , array
+    , base >=4.7 && <5
+    , containers
+    , meiro
+    , random
+    , stm
+    , time
+  default-language: Haskell2010
+
+test-suite meiro-test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Meiro.GameplaySpec
+      Meiro.MazeGenerationSpec
+      Meiro.RenderingSpec
+      Meiro.TypesSpec
+      Meiro.UtilsSpec
+      Paths_meiro
+  hs-source-dirs:
+      test
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      QuickCheck
+    , ansi-terminal
+    , array
+    , base >=4.7 && <5
+    , containers
+    , hspec
+    , hspec-discover
+    , meiro
+    , random
+    , stm
+    , time
+  default-language: Haskell2010

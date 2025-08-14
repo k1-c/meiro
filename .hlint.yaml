@@ -1,0 +1,29 @@
+# HLint configuration for Meiro
+
+- extensions:
+  - default: true
+
+# Ignore some pedantic suggestions
+- ignore: {name: "Redundant do"}
+- ignore: {name: "Redundant bracket"}
+- ignore: {name: "Use camelCase"}
+- ignore: {name: "Use String"}
+
+# Custom rules for the project
+- warn: {lhs: "head (reverse x)", rhs: "last x"}
+- warn: {lhs: "reverse (reverse x)", rhs: "x"}
+
+# Allow certain patterns common in game development
+- ignore: {name: "Use maybe", within: ["Meiro.Gameplay"]}
+- ignore: {name: "Use fmap", within: ["Meiro.Rendering"]}
+
+# Module-specific ignores
+- modules:
+  - {name: ["Meiro.Types"], ignore: ["Use newtype instead of data"]}
+  - {name: ["Meiro.Algorithms.*"], ignore: ["Eta reduce"]}
+
+# Error on these suggestions (make them mandatory)
+- error: {lhs: "x == True", rhs: "x"}
+- error: {lhs: "x == False", rhs: "not x"}
+- error: {lhs: "if x then True else False", rhs: "x"}
+- error: {lhs: "if x then False else True", rhs: "not x"}

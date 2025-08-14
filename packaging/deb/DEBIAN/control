@@ -1,0 +1,12 @@
+Package: meiro
+Version: 1.0.0
+Architecture: amd64
+Maintainer: k1-c <k1-c@example.com>
+Description: Terminal-based maze generation and solving game
+ Meiro is a terminal-based maze game featuring multiple generation algorithms
+ including Recursive Backtracking, Kruskal's MST, and Prim's MST.
+ Navigate through randomly generated mazes using WASD keys or arrow keys.
+Depends: libc6, libgmp10
+Section: games
+Priority: optional
+Homepage: https://github.com/k1-c/meiro
