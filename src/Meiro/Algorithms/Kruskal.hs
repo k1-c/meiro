@@ -85,6 +85,8 @@ union uf root1 root2 = uf // [(root2, root1)]
 -- | Set cell at specific position
 setCellAt :: Position -> Cell -> [[Cell]] -> [[Cell]]
 setCellAt (x, y) newCell grid =
-    let (before, row:after) = splitAt y grid
-        newRow = take x row ++ [newCell] ++ drop (x + 1) row
-    in before ++ [newRow] ++ after
+    case splitAt y grid of
+        (before, row:after) ->
+            let newRow = take x row ++ [newCell] ++ drop (x + 1) row
+            in before ++ [newRow] ++ after
+        _ -> grid  -- Return unchanged grid if index out of bounds

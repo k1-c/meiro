@@ -1,0 +1,17 @@
+# Trivy ignore file for Meiro project
+
+# Ignore test directories
+test/
+
+# Ignore build artifacts
+.stack-work/
+dist/
+
+# Ignore documentation
+*.md
+
+# Ignore GitHub workflows (they are not part of the application)
+.github/
+
+# Ignore Haskell Stack lock files (dependencies are pinned)
+stack.yaml.lock

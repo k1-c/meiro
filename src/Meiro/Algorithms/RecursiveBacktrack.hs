@@ -4,13 +4,11 @@ module Meiro.Algorithms.RecursiveBacktrack
     ) where
 
 import System.Random (StdGen, randomR)
-import Data.List (delete)
 import Meiro.Types
-import Meiro.Utils
 
 -- | Recursive backtracking maze generation algorithm
 generateRecursiveBacktrackMaze :: [[Cell]] -> Int -> Int -> Position -> StdGen -> ([[Cell]], StdGen)
-generateRecursiveBacktrackMaze grid width height startPos gen = 
+generateRecursiveBacktrackMaze _ width height startPos gen = 
     let -- Initialize grid with all walls
         initialGrid = replicate height (replicate width Wall)
         -- Start the recursive backtracking from start position
@@ -27,7 +25,10 @@ recursiveBacktrack grid stack@(current:rest) _ gen width height =
         unvisitedNeighbors = getUnvisitedNeighbors gridWithCurrent current width height
     in if null unvisitedNeighbors
        then -- Backtrack: no unvisited neighbors
-           recursiveBacktrack gridWithCurrent rest (if null rest then current else head rest) gen width height
+           let nextPos = if null rest then current else safeHead rest current
+               safeHead [] def = def
+               safeHead (h:_) _ = h
+           in recursiveBacktrack gridWithCurrent rest nextPos gen width height
        else -- Choose a random neighbor
            let (randomIndex, newGen) = randomR (0, length unvisitedNeighbors - 1) gen
                chosenNeighbor = unvisitedNeighbors !! randomIndex
@@ -59,6 +60,8 @@ getCellAt grid (x, y) = (grid !! y) !! x
 -- | Set cell at specific position
 setCellAt :: Position -> Cell -> [[Cell]] -> [[Cell]]
 setCellAt (x, y) newCell grid =
-    let (before, row:after) = splitAt y grid
-        newRow = take x row ++ [newCell] ++ drop (x + 1) row
-    in before ++ [newRow] ++ after
+    case splitAt y grid of
+        (before, row:after) ->
+            let newRow = take x row ++ [newCell] ++ drop (x + 1) row
+            in before ++ [newRow] ++ after
+        _ -> grid  -- Return unchanged grid if index out of bounds

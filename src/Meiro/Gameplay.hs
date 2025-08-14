@@ -161,7 +161,7 @@ moveInDirection (x, y) West  = (x - 1, y)
 
 -- | Check if move to position is valid
 isValidMove :: Maze -> Position -> Bool
-isValidMove maze pos@(x, y) =
+isValidMove maze (x, y) =
     let grid = mazeCells maze
         width = mazeWidth maze
         height = mazeHeight maze

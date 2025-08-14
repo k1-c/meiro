@@ -57,9 +57,11 @@ renderMazeToString maze playerPos style =
 -- | Update maze grid to show player position
 updateMazeWithPlayer :: [[Cell]] -> Position -> [[Cell]]
 updateMazeWithPlayer grid (px, py) =
-    let (before, row:after) = splitAt py grid
-        newRow = take px row ++ [Player] ++ drop (px + 1) row
-    in before ++ [newRow] ++ after
+    case splitAt py grid of
+        (before, row:after) ->
+            let newRow = take px row ++ [Player] ++ drop (px + 1) row
+            in before ++ [newRow] ++ after
+        _ -> grid  -- Return unchanged grid if index out of bounds
 
 -- | Render a single row of the maze
 renderRow :: CellStyle -> [Cell] -> String

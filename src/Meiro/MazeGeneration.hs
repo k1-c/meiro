@@ -72,6 +72,8 @@ setCell maze pos newCell
 -- | Update cell at specific position
 updateCellAt :: Cell -> Position -> [[Cell]] -> [[Cell]]
 updateCellAt newCell (x, y) grid =
-    let (before, row:after) = splitAt y grid
-        newRow = take x row ++ [newCell] ++ drop (x + 1) row
-    in before ++ [newRow] ++ after
+    case splitAt y grid of
+        (before, row:after) ->
+            let newRow = take x row ++ [newCell] ++ drop (x + 1) row
+            in before ++ [newRow] ++ after
+        _ -> grid  -- Return unchanged grid if index out of bounds

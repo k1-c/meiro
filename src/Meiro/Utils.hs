@@ -10,7 +10,8 @@ module Meiro.Utils
 
 import System.Random (StdGen, randomR)
 import Data.Time (NominalDiffTime)
-import System.IO (isEOF, getChar)
+import System.IO (isEOF)
+import qualified System.IO as IO
 import Control.Exception (catch, IOException)
 
 -- | Fisher-Yates shuffle algorithm for lists
@@ -47,7 +48,7 @@ safeGetChar = do
     eof <- isEOF
     if eof
     then return 'q'  -- Finish when EOF
-    else getChar `catch` handler
+    else IO.getChar `catch` handler
   where
     handler :: IOException -> IO Char
     handler _ = return 'q'
