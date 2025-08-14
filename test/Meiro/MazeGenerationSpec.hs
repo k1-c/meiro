@@ -1,7 +1,6 @@
 module Meiro.MazeGenerationSpec (spec) where
 
 import Test.Hspec
-import Test.Hspec.QuickCheck
 import Test.QuickCheck
 import System.Random (mkStdGen)
 import Meiro.Types

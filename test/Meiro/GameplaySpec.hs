@@ -1,7 +1,6 @@
 module Meiro.GameplaySpec (spec) where
 
 import Test.Hspec
-import Data.Time (getCurrentTime)
 import System.Random (mkStdGen)
 import Meiro.Types
 import Meiro.MazeGeneration

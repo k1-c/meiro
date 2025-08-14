@@ -1,7 +1,6 @@
 module Meiro.UtilsSpec (spec) where
 
 import Test.Hspec
-import Test.Hspec.QuickCheck
 import Test.QuickCheck
 import System.Random (mkStdGen)
 import Data.Time (secondsToNominalDiffTime)
@@ -24,7 +23,7 @@ spec = describe "Meiro.Utils" $ do
       result `shouldBe` []
     
     it "handles single element lists" $ do
-      let (result, _) = fisherYatesShuffle [42] (mkStdGen 42)
+      let (result, _) = fisherYatesShuffle [42 :: Int] (mkStdGen 42)
       result `shouldBe` [42]
 
   describe "Random indices generation" $ do

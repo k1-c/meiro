@@ -40,7 +40,9 @@ spec = describe "Meiro.Rendering" $ do
           lines' = lines result
       length lines' `shouldBe` 3
       -- First and last rows should be all walls
-      head lines' `shouldBe` "██████"
+      case lines' of
+        [] -> fail "No lines in rendered maze"
+        (firstLine:_) -> firstLine `shouldBe` "██████"
       last lines' `shouldBe` "██████"
       -- Middle row should have player
       (lines' !! 1) `shouldContain` "🤖"
