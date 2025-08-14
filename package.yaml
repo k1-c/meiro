@@ -35,6 +35,11 @@ ghc-options:
 - -Wpartial-fields
 - -Wredundant-constraints
 
+when:
+  - condition: os(darwin)
+    ghc-options:
+    - -Wno-nonportable-include-path
+
 library:
   source-dirs: src
 
