@@ -9,9 +9,7 @@
 [![License](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge&logo=opensourceinitiative)](LICENSE)
 [![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux-lightgrey?style=for-the-badge&logo=apple)](https://github.com/k1-c/meiro/releases)
 
-<video src="assets/demo.mp4" width="600" autoplay loop muted>
-  <a href="assets/demo.mp4">View Demo Video</a>
-</video>
+![Demo](assets/demo.gif)
 
 *Navigate through algorithmically generated mazes with style 🎯*
 
