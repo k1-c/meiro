@@ -69,7 +69,7 @@ packages:
 # Static linking configuration for binary distribution
 # Note: -static flags only work on Linux, not macOS
 ghc-options:
-  "*": -O2
+  "$locals": -O2
   meiro: -threaded -rtsopts -with-rtsopts=-N -O2
 
 # Docker configuration
