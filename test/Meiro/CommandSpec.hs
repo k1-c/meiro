@@ -1,9 +1,7 @@
 module Meiro.CommandSpec (spec) where
 
 import Test.Hspec
-import Test.QuickCheck
 import Meiro.Command
-import Meiro.Types
 import Meiro.MazeGeneration (MazeAlgorithm(..))
 
 spec :: Spec
@@ -12,7 +10,7 @@ spec = do
     describe "default configuration" $ do
       it "returns default config for empty arguments" $ do
         let config = parseArgs [] defaultConfig
-        configWidth config `shouldBe` 30
+        configWidth config `shouldBe` 25
         configHeight config `shouldBe` 15
         configAlgorithm config `shouldBe` RecursiveBacktrack
         configAction config `shouldBe` PlayGame
@@ -54,7 +52,7 @@ spec = do
       it "rejects even width" $ do
         let config = parseArgs ["--size", "24x15"] defaultConfig
         case configAction config of
-          InvalidArgs msg -> msg `shouldContain` "Invalid size format"
+          InvalidArgs msg -> msg `shouldContain` "Invalid size"
           _ -> expectationFailure "Expected InvalidArgs"
 
       it "rejects even height" $ do

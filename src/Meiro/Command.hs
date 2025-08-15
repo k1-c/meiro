@@ -8,7 +8,6 @@ module Meiro.Command
     , defaultConfig
     ) where
 
-import Meiro.Types
 import Meiro.MazeGeneration (generateMazeWithAlgorithm, MazeAlgorithm(..))
 import Meiro.Gameplay (playGame, GameResult(..))
 import System.Exit (exitWith, ExitCode(..))
