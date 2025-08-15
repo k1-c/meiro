@@ -56,6 +56,39 @@ curl -L https://github.com/k1-c/meiro/releases/latest/download/meiro-darwin-arm6
 ./meiro
 ```
 
+### Command & Arguments
+
+```bash
+# Basic usage - start game with default settings
+meiro
+
+# Specify maze size (width x height)
+meiro --size 30x20
+meiro -s 50x50
+
+# Choose algorithm
+meiro --algorithm recursive    # Recursive Backtracking (default)
+meiro --algorithm kruskal      # Kruskal's MST
+meiro --algorithm prim         # Prim's MST
+meiro -a kruskal              # Short form
+
+# Combine options
+meiro --size 40x30 --algorithm prim
+
+# Help & version
+meiro --help                   # Show help message
+meiro --version                # Show version info
+```
+
+**Available Options:**
+
+| Option | Short | Description | Default |
+|--------|-------|-------------|---------|
+| `--size WxH` | `-s` | Maze dimensions (width x height) | `30x15` |
+| `--algorithm` | `-a` | Generation algorithm (`recursive`, `kruskal`, `prim`) | `recursive` |
+| `--help` | `-h` | Show help message | - |
+| `--version` | `-v` | Show version information | - |
+
 ---
 
 ## 🎯 How to Play
