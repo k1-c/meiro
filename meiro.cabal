@@ -31,6 +31,7 @@ library
       Meiro.Algorithms.Kruskal
       Meiro.Algorithms.Prim
       Meiro.Algorithms.RecursiveBacktrack
+      Meiro.Command
       Meiro.Gameplay
       Meiro.MazeGeneration
       Meiro.Rendering
@@ -77,6 +78,7 @@ test-suite meiro-test
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
+      Meiro.CommandSpec
       Meiro.GameplaySpec
       Meiro.MazeGenerationSpec
       Meiro.RenderingSpec

@@ -46,9 +46,9 @@ curl -fsSL https://raw.githubusercontent.com/k1-c/meiro/main/install.sh | MEIRO_
 # Basic usage - start game with default settings
 meiro
 
-# Specify maze size (width x height)
-meiro --size 30x20
-meiro -s 50x50
+# Specify maze size (width x height) - both must be odd numbers >= 5
+meiro --size 15x15
+meiro -s 25x35
 
 # Choose algorithm
 meiro --algorithm recursive    # Recursive Backtracking (default)
@@ -57,7 +57,7 @@ meiro --algorithm prim         # Prim's MST
 meiro -a kruskal              # Short form
 
 # Combine options
-meiro --size 40x30 --algorithm prim
+meiro --size 41x31 --algorithm prim
 
 # Help & version
 meiro --help                   # Show help message
@@ -68,7 +68,7 @@ meiro --version                # Show version info
 
 | Option | Short | Description | Default |
 |--------|-------|-------------|---------|
-| `--size WxH` | `-s` | Maze dimensions (width x height) | `30x15` |
+| `--size WxH` | `-s` | Maze dimensions (width x height, both must be odd numbers ≥ 5) | `25x15` |
 | `--algorithm` | `-a` | Generation algorithm (`recursive`, `kruskal`, `prim`) | `recursive` |
 | `--help` | `-h` | Show help message | - |
 | `--version` | `-v` | Show version information | - |
