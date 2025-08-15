@@ -40,10 +40,10 @@ while IFS= read -r line; do
     
     # Extract type from conventional commit format
     # Handle emoji prefix: "✨ feat: description" or "feat: description"
-    if [[ "$message" =~ ^[^a-zA-Z]*([a-zA-Z]+)(\([^)]+\))?!?:\ (.+)$ ]]; then
+    if [[ "$message" =~ ^[^a-zA-Z]*([a-zA-Z]+)[^:]*:[[:space:]](.+)$ ]]; then
         type="${BASH_REMATCH[1]}"
-        scope="${BASH_REMATCH[2]}"
-        description="${BASH_REMATCH[3]}"
+        scope=""
+        description="${BASH_REMATCH[2]}"
         
         # Check for breaking changes
         if [[ "$message" == *"!"* ]] || [[ "$body" == *"BREAKING CHANGE"* ]]; then
