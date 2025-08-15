@@ -9,7 +9,7 @@ main :: IO ()
 main = do
     args <- getArgs
     case args of
-        [] -> showHelp
+        [] -> handlePlay "15" RecursiveBacktrack  -- Default: play mode with size 15
         ["--version"] -> putStrLn "meiro version 0.1.0.0"
         ["--generate", sizeStr] -> handleGenerate sizeStr RecursiveBacktrack
         ["--generate", sizeStr, "--algorithm", algoStr] -> do
@@ -19,6 +19,7 @@ main = do
                     putStrLn $ "Unknown algorithm: " ++ algoStr
                     showAlgorithms
                     exitWith (ExitFailure 1)
+        ["--play"] -> handlePlay "15" RecursiveBacktrack  -- Default size 15
         ["--play", sizeStr] -> handlePlay sizeStr RecursiveBacktrack
         ["--play", sizeStr, "--algorithm", algoStr] -> do
             case parseAlgorithm algoStr of
@@ -39,14 +40,17 @@ showHelp = do
     putStrLn "Usage: meiro [options]"
     putStrLn ""
     putStrLn "Options:"
+    putStrLn "  (no options)                        Play a maze with default size 15"
     putStrLn "  --generate <size>                   Generate and display a maze"
     putStrLn "  --generate <size> --algorithm <algo> Generate maze with specific algorithm"
+    putStrLn "  --play                              Play a maze with default size 15"
     putStrLn "  --play <size>                       Generate and play a maze interactively"
     putStrLn "  --play <size> --algorithm <algo>    Play maze with specific algorithm"
     putStrLn "  --algorithms                        List available algorithms"
     putStrLn "  --version                           Show version information"
     putStrLn ""
     putStrLn "Size must be an odd number >= 5 (e.g., 5, 7, 9, 11, 15, 25)"
+    putStrLn "Default size is 15 when not specified."
     putStrLn ""
     putStrLn "Run --algorithms to see available maze generation algorithms"
 
