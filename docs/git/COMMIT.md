@@ -25,34 +25,34 @@ This document defines commit message conventions following the [Conventional Com
 
 ### Primary Types (Conventional Commits Standard)
 
-| Emoji | Type     | Description                                                 | Example                                          |
-| ----- | -------- | ----------------------------------------------------------- | ------------------------------------------------ |
-| ✨    | `feat`   | A new feature                                              | `✨ feat: add dark mode toggle`                 |
-| 🐛    | `fix`    | A bug fix                                                  | `🐛 fix: resolve null pointer exception`        |
-| 📚    | `docs`   | Documentation only changes                                 | `📚 docs: update installation guide`            |
-| 🎨    | `style`  | Changes that don't affect code meaning (formatting, etc.) | `🎨 style: format code with prettier`           |
-| ♻️    | `refactor` | Code change that neither fixes a bug nor adds a feature | `♻️ refactor: extract auth logic into service`  |
-| ⚡    | `perf`   | Performance improvements                                   | `⚡ perf: lazy load images`                     |
-| ✅    | `test`   | Adding or correcting tests                                 | `✅ test: add unit tests for user service`      |
-| 🏗️    | `build`  | Changes to build system or dependencies                    | `🏗️ build: update webpack to v5`               |
-| 👷    | `ci`     | Changes to CI configuration files and scripts              | `👷 ci: add GitHub Actions workflow`            |
-| 🧹    | `chore`  | Other changes that don't modify src or test files         | `🧹 chore: update .gitignore`                   |
-| ⏪    | `revert` | Reverts a previous commit                                  | `⏪ revert: revert commit abc123`               |
+| Emoji | GitHub Code               | Type       | Description                                               | Example                                        |
+| ----- | ------------------------- | ---------- | --------------------------------------------------------- | ---------------------------------------------- |
+| ✨    | `:sparkles:`              | `feat`     | A new feature                                             | `✨ feat: add dark mode toggle`                |
+| 🐛    | `:bug:`                   | `fix`      | A bug fix                                                 | `🐛 fix: resolve null pointer exception`       |
+| 📚    | `:books:`                 | `docs`     | Documentation only changes                                | `📚 docs: update installation guide`           |
+| 🎨    | `:art:`                   | `style`    | Changes that don't affect code meaning (formatting, etc.) | `🎨 style: format code with prettier`          |
+| ♻️    | `:recycle:`               | `refactor` | Code change that neither fixes a bug nor adds a feature   | `♻️ refactor: extract auth logic into service` |
+| ⚡    | `:zap:`                   | `perf`     | Performance improvements                                  | `⚡ perf: lazy load images`                    |
+| ✅    | `:white_check_mark:`      | `test`     | Adding or correcting tests                                | `✅ test: add unit tests for user service`     |
+| 🏗️    | `:building_construction:` | `build`    | Changes to build system or dependencies                   | `🏗️ build: update webpack to v5`               |
+| 👷    | `:construction_worker:`   | `ci`       | Changes to CI configuration files and scripts             | `👷 ci: add GitHub Actions workflow`           |
+| 🧹    | `:broom:`                 | `chore`    | Other changes that don't modify src or test files         | `🧹 chore: update .gitignore`                  |
+| ⏪    | `:rewind:`                | `revert`   | Reverts a previous commit                                 | `⏪ revert: revert commit abc123`              |
 
 ### Additional Types (Extended)
 
-| Emoji | Type       | Description                          | Example                                     |
-| ----- | ---------- | ------------------------------------ | ------------------------------------------- |
-| 🔒    | `security` | Security improvements or fixes       | `🔒 security: patch XSS vulnerability`     |
-| ⬆️    | `deps`     | Dependency updates                   | `⬆️ deps: upgrade React to v18`            |
-| 🔧    | `config`   | Configuration changes                | `🔧 config: update ESLint rules`           |
-| 🏷️    | `release`  | Release/version related changes      | `🏷️ release: bump version to 1.2.0`        |
-| 🚑    | `hotfix`   | Critical hotfix                      | `🚑 hotfix: fix production crash`          |
-| 💄    | `ui`       | UI/UX improvements                   | `💄 ui: improve button styling`            |
-| 🌐    | `i18n`     | Internationalization                 | `🌐 i18n: add Japanese translations`       |
-| ♿    | `a11y`     | Accessibility improvements           | `♿ a11y: add screen reader support`       |
-| 📸    | `snapshot` | Update snapshots                     | `📸 snapshot: update test snapshots`       |
-| 🧪    | `experiment` | Experimental changes               | `🧪 experiment: try new algorithm`         |
+| Emoji | GitHub Code              | Type         | Description                     | Example                                |
+| ----- | ------------------------ | ------------ | ------------------------------- | -------------------------------------- |
+| 🔒    | `:lock:`                 | `security`   | Security improvements or fixes  | `🔒 security: patch XSS vulnerability` |
+| ⬆️    | `:arrow_up:`             | `deps`       | Dependency updates              | `⬆️ deps: upgrade React to v18`        |
+| 🔧    | `:wrench:`               | `config`     | Configuration changes           | `🔧 config: update ESLint rules`       |
+| 🏷️    | `:label:`                | `release`    | Release/version related changes | `🏷️ release: bump version to 1.2.0`    |
+| 🚑    | `:ambulance:`            | `hotfix`     | Critical hotfix                 | `🚑 hotfix: fix production crash`      |
+| 💄    | `:lipstick:`             | `ui`         | UI/UX improvements              | `💄 ui: improve button styling`        |
+| 🌐    | `:globe_with_meridians:` | `i18n`       | Internationalization            | `🌐 i18n: add Japanese translations`   |
+| ♿    | `:wheelchair:`           | `a11y`       | Accessibility improvements      | `♿ a11y: add screen reader support`   |
+| 📸    | `:camera_flash:`         | `snapshot`   | Update snapshots                | `📸 snapshot: update test snapshots`   |
+| 🧪    | `:test_tube:`            | `experiment` | Experimental changes            | `🧪 experiment: try new algorithm`     |
 
 ## 🔍 Scope
 
@@ -86,7 +86,8 @@ Scope provides additional contextual information and should be a noun describing
 Breaking changes MUST be indicated by:
 
 1. **`!` after type/scope**: `💥 feat(api)!: change response format`
-2. **BREAKING CHANGE in footer**: 
+2. **BREAKING CHANGE in footer**:
+
 ```
 ✨ feat: allow provided config object to extend other configs
 
@@ -98,6 +99,7 @@ BREAKING CHANGE: `extends` key in config file is now used for extending other co
 ### Before Committing
 
 **Always ensure that tests, linting, and builds pass before committing:**
+
 - Run all tests and verify they pass
 - Run linting tools and fix any issues
 - Ensure the project builds successfully
@@ -108,7 +110,7 @@ BREAKING CHANGE: `extends` key in config file is now used for extending other co
 1. **Emoji is mandatory**: Every commit must start with an appropriate emoji
 2. **Type is mandatory**: Every commit must have a type after the emoji
 3. **Description is mandatory**: Must be in present tense, not capitalized, no period at the end
-4. **Line length**: 
+4. **Line length**:
    - Subject line: max 72 characters
    - Body: wrap at 72 characters
 5. **Separate subject from body**: With a blank line
@@ -116,6 +118,7 @@ BREAKING CHANGE: `extends` key in config file is now used for extending other co
 ### Format Rules
 
 #### Subject Line
+
 - Start with an emoji
 - Follow with type and optional scope
 - Use the imperative, present tense: "change" not "changed" nor "changes"
@@ -123,12 +126,14 @@ BREAKING CHANGE: `extends` key in config file is now used for extending other co
 - No dot (.) at the end
 
 #### Body (Optional)
+
 - Use when the commit requires explanation
 - Explain the motivation for the change
 - Wrap at 72 characters
 - Can use bullet points with `-` or `*`
 
 #### Footer (Optional)
+
 - Reference issues: `Closes #123`, `Fixes #456`
 - Note breaking changes: `BREAKING CHANGE: description`
 - Co-authors: `Co-authored-by: Name <email>`
@@ -245,12 +250,14 @@ echo '{ "path": "cz-conventional-changelog" }' > ~/.czrc
 ```
 
 For emoji support:
+
 ```bash
 npm install -g cz-emoji
 echo '{ "path": "cz-emoji" }' > ~/.czrc
 ```
 
 Usage:
+
 ```bash
 git cz
 ```
@@ -262,11 +269,15 @@ Enforce commit conventions with emoji support:
 ```javascript
 // commitlint.config.js
 module.exports = {
-  extends: ['@commitlint/config-conventional'],
+  extends: ["@commitlint/config-conventional"],
   rules: {
-    'subject-case': [2, 'never', ['sentence-case', 'start-case', 'pascal-case', 'upper-case']],
-    'header-pattern': [2, 'always', /^[\u{1F300}-\u{1F9FF}][\s\S]*$/u]
-  }
+    "subject-case": [
+      2,
+      "never",
+      ["sentence-case", "start-case", "pascal-case", "upper-case"],
+    ],
+    "header-pattern": [2, "always", /^[\u{1F300}-\u{1F9FF}][\s\S]*$/u],
+  },
 };
 ```
 
@@ -284,13 +295,16 @@ Configure semantic-release to parse emoji commits:
 ```json
 {
   "plugins": [
-    ["@semantic-release/commit-analyzer", {
-      "preset": "conventionalcommits",
-      "parserOpts": {
-        "headerPattern": "^(\\p{Emoji}+)\\s+(\\w+)(?:\\(([\\w\\$\\.\\-\\*\\s]*)\\))?\\!?:\\s+(.+)$/u",
-        "headerCorrespondence": ["emoji", "type", "scope", "subject"]
+    [
+      "@semantic-release/commit-analyzer",
+      {
+        "preset": "conventionalcommits",
+        "parserOpts": {
+          "headerPattern": "^(\\p{Emoji}+)\\s+(\\w+)(?:\\(([\\w\\$\\.\\-\\*\\s]*)\\))?\\!?:\\s+(.+)$/u",
+          "headerCorrespondence": ["emoji", "type", "scope", "subject"]
+        }
       }
-    }],
+    ],
     "@semantic-release/release-notes-generator",
     "@semantic-release/github"
   ]
@@ -303,26 +317,27 @@ Create `.gitmessage`:
 
 ```
 # <emoji> <type>[optional scope]: <description>
-# 
+#
 # [optional body]
-# 
+#
 # [optional footer(s)]
 
 # Emoji Guide:
-# ✨ feat: New feature
-# 🐛 fix: Bug fix
-# 📚 docs: Documentation
-# 🎨 style: Formatting
-# ♻️ refactor: Code refactoring
-# ⚡ perf: Performance
-# ✅ test: Testing
-# 🏗️ build: Build system
-# 👷 ci: CI/CD
-# 🧹 chore: Maintenance
-# ⏪ revert: Revert changes
+# ✨ :sparkles: feat: New feature
+# 🐛 :bug: fix: Bug fix
+# 📚 :books: docs: Documentation
+# 🎨 :art: style: Formatting
+# ♻️ :recycle: refactor: Code refactoring
+# ⚡ :zap: perf: Performance
+# ✅ :white_check_mark: test: Testing
+# 🏗️ :building_construction: build: Build system
+# 👷 :construction_worker: ci: CI/CD
+# 🧹 :broom: chore: Maintenance
+# ⏪ :rewind: revert: Revert changes
 ```
 
 Configure:
+
 ```bash
 git config --global commit.template ~/.gitmessage
 ```

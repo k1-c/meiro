@@ -3,7 +3,7 @@ version:             0.1.0.0
 github:              "k1-c/meiro"
 license:             MIT
 author:              "k1-c"
-maintainer:          "k1-c@example.com"
+maintainer:          "shun.kimura@integritis.io"
 copyright:           "2025 k1-c"
 
 extra-source-files:

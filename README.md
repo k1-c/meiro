@@ -11,7 +11,7 @@
 
 ![Demo](assets/demo.gif)
 
-*Navigate through algorithmically generated mazes with style 🎯*
+_Navigate through algorithmically generated mazes with style 🎯_
 
 </div>
 
@@ -22,54 +22,23 @@
 🎨 **Beautiful Rendering** • Unicode art with emoji characters  
 ⚡ **Lightning Fast** • Written in Haskell for optimal performance  
 📦 **Zero Dependencies** • Single static binary, ready to run  
-🌍 **Cross Platform** • macOS (Intel & Apple Silicon) and Linux support  
+🌍 **Cross Platform** • macOS (Intel & Apple Silicon) and Linux support
 
 ---
 
 ## 🚀 Quick Start
 
-### Package Managers
+### One-line Install
 
-<table>
-<tr>
-<td width="50%">
-
-**macOS & Linux**
 ```bash
-brew tap k1-c/tap
-brew install meiro
+curl -fsSL https://raw.githubusercontent.com/k1-c/meiro/main/install.sh | bash
 ```
 
-</td>
-<td width="50%">
+Or with custom install directory:
 
-**Arch Linux**
 ```bash
-yay -S meiro
+curl -fsSL https://raw.githubusercontent.com/k1-c/meiro/main/install.sh | MEIRO_INSTALL_DIR=~/.local/bin bash
 ```
-
-</td>
-</tr>
-<tr>
-<td>
-
-**Ubuntu/Debian**
-```bash
-# Download .deb from releases
-sudo dpkg -i meiro_*.deb
-```
-
-</td>
-<td>
-
-**Snap Store**
-```bash
-sudo snap install meiro
-```
-
-</td>
-</tr>
-</table>
 
 ### Direct Download
 
@@ -80,7 +49,7 @@ curl -L https://github.com/k1-c/meiro/releases/latest/download/meiro-linux-x86_6
 # macOS Intel
 curl -L https://github.com/k1-c/meiro/releases/latest/download/meiro-darwin-x86_64.tar.gz | tar -xz
 
-# macOS Apple Silicon  
+# macOS Apple Silicon
 curl -L https://github.com/k1-c/meiro/releases/latest/download/meiro-darwin-arm64.tar.gz | tar -xz
 
 # Run it!
@@ -110,6 +79,7 @@ curl -L https://github.com/k1-c/meiro/releases/latest/download/meiro-darwin-arm6
 ```
 
 **Controls:**
+
 - `WASD` or `Arrow Keys` • Move around
 - `Q` • Quit game
 
@@ -142,7 +112,7 @@ curl -L https://github.com/k1-c/meiro/releases/latest/download/meiro-darwin-arm6
 
 - **Type**: Minimum Spanning Tree (growing tree)
 - **Characteristics**: Creates dense branching with organic growth patterns
-- **Performance**: O(n log n) time, O(n) space  
+- **Performance**: O(n log n) time, O(n) space
 - **Best for**: Compact mazes with natural-looking structures
 
 </details>
@@ -167,6 +137,7 @@ src/
 ```
 
 **Tech Stack:**
+
 - **Language**: Haskell with GHC 9.10
 - **Build System**: Stack
 - **Dependencies**: Minimal (only base libraries)
@@ -178,10 +149,12 @@ src/
 ## 🛠️ Development
 
 ### Prerequisites
+
 - [Stack](https://docs.haskellstack.org/en/stable/README/)
 - GHC 9.10.2
 
 ### Build from Source
+
 ```bash
 git clone https://github.com/k1-c/meiro.git
 cd meiro
@@ -197,18 +170,19 @@ stack build --copy-bins --local-bin-path ./dist
 ```
 
 ### Contributing
-We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
+We welcome contributions! Please see [CONTRIBUTING.md](docs/CONTRIBUTING.md) for guidelines.
 
 ---
 
 ## 📊 Performance
 
-| Metric | Value |
-|--------|--------|
-| Binary Size | ~4MB |
-| Memory Usage | <10MB |
-| Startup Time | <100ms |
-| 50x50 Maze | <1ms generation |
+| Metric       | Value           |
+| ------------ | --------------- |
+| Binary Size  | ~4MB            |
+| Memory Usage | <10MB           |
+| Startup Time | <100ms          |
+| 50x50 Maze   | <1ms generation |
 
 ---
 
@@ -231,10 +205,12 @@ customStyle = CellStyle
 ## 📋 System Requirements
 
 **Supported Platforms:**
+
 - macOS 10.15+ (Intel & Apple Silicon)
 - Linux x86_64 (Ubuntu 18.04+, etc.)
 
 **Requirements:**
+
 - Terminal with Unicode support
 - 4MB free disk space
 - 10MB RAM
@@ -251,6 +227,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Made with ❤️ in Haskell**
 
-[Report Bug](https://github.com/k1-c/meiro/issues) • [Request Feature](https://github.com/k1-c/meiro/issues) • [Contribute](CONTRIBUTING.md)
+[Report Bug](https://github.com/k1-c/meiro/issues) • [Request Feature](https://github.com/k1-c/meiro/issues) • [Contribute](docs/CONTRIBUTING.md)
 
 </div>
