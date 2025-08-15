@@ -40,22 +40,6 @@ Or with custom install directory:
 curl -fsSL https://raw.githubusercontent.com/k1-c/meiro/main/install.sh | MEIRO_INSTALL_DIR=~/.local/bin bash
 ```
 
-### Direct Download
-
-```bash
-# Linux x86_64
-curl -L https://github.com/k1-c/meiro/releases/latest/download/meiro-linux-x86_64.tar.gz | tar -xz
-
-# macOS Intel
-curl -L https://github.com/k1-c/meiro/releases/latest/download/meiro-darwin-x86_64.tar.gz | tar -xz
-
-# macOS Apple Silicon
-curl -L https://github.com/k1-c/meiro/releases/latest/download/meiro-darwin-arm64.tar.gz | tar -xz
-
-# Run it!
-./meiro
-```
-
 ### Command & Arguments
 
 ```bash
